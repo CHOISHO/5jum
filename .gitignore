@@ -1,4 +1,7 @@
 # Build and Release Folders
+node_modules/
+/dist/
+npm-debug.log*
 bin/
 bin-debug/
 bin-release/
