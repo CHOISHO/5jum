@@ -1,11 +1,11 @@
 <template>  
-  <map-type-btn></map-type-btn>
+  <daum-map></daum-map>  
 </template>
 
 <script>
 
 import DaumMap from './components/DaumMap'
-import MapTypeBtn from './components/mapTypeBtn' 
+
 
 export default {
   name: 'app',
@@ -20,8 +20,10 @@ export default {
     }
   },
   components: {
-    DaumMap,
-    MapTypeBtn
+    DaumMap,    
+  },
+  updated(){
+    console.log(11)
   }
 }
 </script>

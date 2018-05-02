@@ -7,28 +7,21 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <title>5jum</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=3da0ae25fb165308953bc402c9c14c2d"></script>
-    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=3da0ae25fb165308953bc402c9c14c2d&libraries=services,clusterer,drawing"></script>
+    <script src="src/js/roulette.min.js"></script>
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=3da0ae25fb165308953bc402c9c14c2d&libraries=services"></script>
 </head>
 
 <body>
     <%= htmlWebpackPlugin.options.cordova || '' %>
         <div id="app"></div>
         <!-- built files will be auto injected -->
-        <div class="map" style="width:100vw;height:100vh;"></div>
-        <div id="clickLatlng"></div>
 
+        <!-- <div id="clickLatlng"></div>
+ -->
 
         <script>
-            var container = document.querySelector('.map'); //지도를 담을 영역의 DOM 레퍼런스
-            var options = { //지도를 생성할 때 필요한 기본 옵션
-                center: new daum.maps.LatLng(37.498004414546934, 127.02770621963765),
-                level: 3
-            };
-
-            var map = new daum.maps.Map(container, options);
         </script>
-        <script>
+        <!-- <script>
             // 지도를 클릭한 위치에 표출할 마커입니다
             var marker = new daum.maps.Marker({
                 // 지도 중심좌표에 마커를 생성합니다 
@@ -54,7 +47,7 @@
                 resultDiv.innerHTML = message;
 
             });
-        </script>
+        </script> -->
 
 </body>
 
