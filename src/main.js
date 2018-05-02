@@ -8,14 +8,15 @@ import VueOnsen from 'vue-onsenui'
 import store from './store'
 import App from './App'
 
+
 Vue.config.productionTip = false
 
 Vue.use(VueOnsen)
 
 /* eslint-disable no-new */
 new Vue({
-  el: '#app',
-  store,
-  template: '<App/>',
-  components: { App }
+    el: '#app',
+    store,
+    template: '<App/>',
+    components: { App }
 })
