@@ -1,11 +1,14 @@
 <template>  
-  <daum-map></daum-map>  
+  <div>
+    <daum-map></daum-map> 
+    <rullette></rullette> 
+  </div>
 </template>
 
 <script>
 
 import DaumMap from './components/DaumMap'
-
+import Rullette from './components/Rullette'
 
 export default {
   name: 'app',
@@ -20,10 +23,8 @@ export default {
     }
   },
   components: {
-    DaumMap,    
-  },
-  updated(){
-    console.log(11)
+    DaumMap,   
+    Rullette 
   }
 }
 </script>

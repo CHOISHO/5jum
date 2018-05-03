@@ -12,8 +12,11 @@
         </div>
         <hr>
         <ul id="placesList"></ul>
-        <div id="pagination"></div>
-        <p >{{list}}</p>
+        <div id="pagination"></div>           
+        <v-ons-list >
+            <v-ons-list-item  v-for="item in searchedList" @click="hi" :key="item">{{item}}</v-ons-list-item>
+        </v-ons-list>
+        <p>{{target}}</p>
     </div>
 </div>
 </template>
@@ -23,20 +26,21 @@ export default {
   name: 'daum',  
   data () {
     return {
-        list: []
+        searchedList: [],
+        selectedList: [],
+        target: []
     }
   },
   mounted(){    
     this.creatMap()    
   },
   updated(){
-     
-     
-      console.log(111)
-    this.getSearchedList()
+               
+    // this.getSearchedList()
      
   },
   methods: {
+
     creatMap(){
       
       var container = document.querySelector('.map'); //지도를 담을 영역의 DOM 레퍼런스
@@ -169,12 +173,12 @@ export default {
       function getListItem(index, places) {
 
           var el = document.createElement('li'),
+          
           itemStr = '<span class="markerbg marker_' + (index+1) + '"></span>' +
                       '<div class="info">' +
                       '   <h5>' + places.place_name + 
-                               '<a href='+places.place_url+ ' target="_blank">link</a>' + 
-                        '</h5>';
-
+                              
+                        '</h5>';          
           if (places.road_address_name) {
               itemStr += '    <span>' + places.road_address_name + '</span>' +
                           '   <span class="jibun gray">' +  places.address_name  + '</span>';
@@ -190,11 +194,10 @@ export default {
           test.push(places.place_name)
         return el;
       }
-        this.list.push(test);
-        let ab = this.list;
-        console.log(ab)
-             console.log(test)
-        
+        this.searchedList = test; 
+        this.$store.state.searchedList = test;
+        console.log("this.$store.state.searchedList : ",  this.$store.state.searchedList )
+        console.log("this.searchedList : ", this.searchedList)
         
       // 마커를 생성하고 지도 위에 마커를 표시하는 함수입니다
       function addMarker(position, idx, title) {
@@ -271,18 +274,24 @@ export default {
               el.removeChild (el.lastChild);
           }
       }
-    },
-    getSearchedList(){
-        let t = document.querySelectorAll("#placesList li");
-        let l = t.length;
-        console.log(l)
-        for(let i = 0; i < l; i++){
-            t[i].addEventListener("click", function(){
-                let tt = $(t[i]).find("h5").html()
-                console.log(tt)
-            })
-        }
     }
+    // ,
+    // getSearchedList(){
+    //     let t = document.querySelectorAll("#placesList li");
+    //     let l = t.length;
+    
+    //     for(let i = 0; i < l; i++){
+    //         t[i].addEventListener("click", function(){
+    //             let tt = $(t[i]).find("h5").html()
+                
+    //         })
+    //     }
+    // },
+    ,hi(e){
+        // let ttt = document.querySelector(".list-item__center")
+        let obj =  $(e.target).html();
+        this.$store.commit('addSelectedList', obj);
+    }   
   }
 }
 </script>
@@ -318,6 +327,7 @@ ons-card {
 ons-list-item, ons-card {
   cursor: pointer;
 }
+
 .map_wrap, .map_wrap * {margin:0;padding:0;font-family:'Malgun Gothic',dotum,'돋움',sans-serif;font-size:12px;}
 .map_wrap a, .map_wrap a:hover, .map_wrap a:active{color:#000;text-decoration: none;}
 .map_wrap {position:relative;width:100%;height:500px;}
@@ -327,6 +337,7 @@ ons-list-item, ons-card {
 #menu_wrap .option{text-align: center;}
 #menu_wrap .option p {margin:10px 0;}  
 #menu_wrap .option button {margin-left:5px;}
+#placesList {display: none;}
 #placesList li {list-style: none;}
 #placesList .item {position:relative;border-bottom:1px solid #888;overflow: hidden;cursor: pointer;min-height: 65px;}
 #placesList .item span {display: block;margin-top:4px;}
@@ -351,7 +362,7 @@ ons-list-item, ons-card {
 #placesList .item .marker_13 {background-position: 0 -562px;}
 #placesList .item .marker_14 {background-position: 0 -608px;}
 #placesList .item .marker_15 {background-position: 0 -654px;}
-#pagination {margin:10px auto;text-align: center;}
+#pagination {margin:10px auto;text-align: center; display: none;}
 #pagination a {display:inline-block;margin-right:10px;}
 #pagination .on {font-weight: bold; cursor: default;color:#777;}
 </style>
